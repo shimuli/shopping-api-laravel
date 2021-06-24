@@ -63,7 +63,10 @@ class User extends Authenticatable
         'remember_token',
         'verified',
         'verification_token',
-        'admin'
+        'admin',
+        'email_verified_at',
+        'created_at',
+        'updated_at'
     ];
 
     /**

@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\TransactionsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,18 +18,19 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::prefix('v1')->name('api.v1.')->group(function () {
-   Route::resource('buyers', BuyerController::class);
-   Route::resource('sellers', SellerController::class);
-   Route::resource('categories', CategoriesController::class);
-   Route::resource('products', ProductsController::class);
-   Route::resource('transactions', TransactionsController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('buyers', BuyerController::class);
+    Route::resource('sellers', SellerController::class);
+    Route::resource('categories', CategoriesController::class);
+    Route::resource('products', ProductsController::class);
+    Route::resource('transactions', TransactionsController::class);
 
 //    ->only(['index', 'show', 'create', 'store']);
 

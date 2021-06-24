@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buyer;
 use Illuminate\Http\Request;
 
 class BuyerController extends Controller
@@ -11,9 +12,20 @@ class BuyerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $perPage = $request->input('per_page') ?? 5;
+
+        $buyer = Buyer::has('transactions')->paginate($perPage)->appends(
+            [
+                'per_page' => $perPage,
+            ]
+        );
+
+        return response()->json(['buyers' => $buyer], 200);
+
+        // $buyer = Buyer::has('transactions')->get();
+        // return response()->json(['buyer'=>$buyer], 200);
     }
 
     /**
@@ -45,7 +57,9 @@ class BuyerController extends Controller
      */
     public function show($id)
     {
-        //
+        $buyer = Buyer::has('transactions')->findOrFail($id);
+        return response()->json(['buyer' => $buyer], 200);
+
     }
 
     /**
