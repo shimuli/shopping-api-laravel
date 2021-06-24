@@ -19,6 +19,8 @@ class User extends Authenticatable
     const ADMIN_USER ='true';
     const REGULAR_USER = 'false';
 
+    protected $table = 'users';
+
 
 
     /**
@@ -27,8 +29,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'user_name',
+        //'last_name',
         'email',
         'phone',
         'password',

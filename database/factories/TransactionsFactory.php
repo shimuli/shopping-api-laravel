@@ -28,8 +28,8 @@ class TransactionsFactory extends Factory
         return [
             'quantity' => $this->faker->numberBetween(1, 3),
             'buyer_id' => $buyer->id,
-            'quantity' => $seller->products->random()->id,
-            
+            'product_id' => $seller->products->random()->id,
+
         ];
     }
 }

@@ -16,12 +16,12 @@ class CategoriesProducts extends Migration
         Schema::create('categories_products', function (Blueprint $table) {
             $table->id();
 
-           $table->unsignedBigInteger('category_id')->index();
-           $table->unsignedBigInteger('product_id')->index();
+           $table->unsignedBigInteger('categories_id')->index();
+           $table->unsignedBigInteger('products_id')->index();
 
 
-           $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-           $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+           $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
+           $table->foreign('products_id')->references('id')->on('products')->onDelete('cascade');
            $table->timestamps();
 
 
