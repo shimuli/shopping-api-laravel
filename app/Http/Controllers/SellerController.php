@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Seller;
 use Illuminate\Http\Request;
 
 class SellerController extends Controller
@@ -11,9 +12,18 @@ class SellerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $perPage = $request->input('per_page') ?? 5;
+
+        $seller = Seller::has('products')->paginate($perPage)->appends(
+            [
+                'per_page' => $perPage,
+            ]
+        );
+
+        return response()->json(['sellers' => $seller], 200);
+
     }
 
     /**
@@ -45,7 +55,9 @@ class SellerController extends Controller
      */
     public function show($id)
     {
-        //
+        $seller = Seller::has('products')->findOrFail($id);
+        return response()->json(['seller' => $seller], 200);
+
     }
 
     /**

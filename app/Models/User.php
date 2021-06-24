@@ -39,6 +39,20 @@ class User extends Authenticatable
         'admin'
     ];
 
+    // name setters and getters
+    public function setUserNameAttribute($name){
+        $this->attributes['user_name'] = strtolower($name);
+    }
+
+     public function getUserNameAttribute($name){
+        return ucwords($name);
+    }
+
+    // email setters
+    public function setEmailAttribute($email){
+        $this->attributes['email'] = strtolower($email);
+    }
+
     public function isVerified(){
         return $this->verified ==User::VERIFIED_USER;
     }
