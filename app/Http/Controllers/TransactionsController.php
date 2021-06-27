@@ -12,9 +12,17 @@ class TransactionsController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $perPage = $request->input('per_page') ?? 5;
+
+        $transactions = Transactions::paginate($perPage)->appends(
+            [
+                'per_page' => $perPage,
+            ]
+        );
+        return response()->json($transactions, 200);
+
     }
 
     /**
@@ -44,9 +52,10 @@ class TransactionsController extends ApiController
      * @param  \App\Models\Transactions  $transactions
      * @return \Illuminate\Http\Response
      */
-    public function show(Transactions $transactions)
+    public function show(Transactions $transaction)
     {
-        //
+        return response()->json($transaction, 200);
+
     }
 
     /**

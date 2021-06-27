@@ -12,9 +12,17 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $perPage = $request->input('per_page') ?? 5;
+
+        $products = Products::paginate($perPage)->appends(
+            [
+                'per_page' => $perPage,
+            ]
+        );
+        return response()->json($products, 200);
+
     }
 
     /**
@@ -44,9 +52,10 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function show(Products $products)
+    public function show(Products $product)
     {
-        //
+        return response()->json($product, 200);
+
     }
 
     /**
@@ -69,7 +78,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Products $products)
     {
-        //
+
     }
 
     /**

@@ -15,6 +15,12 @@ class Transactions extends Model
 
     ];
 
+    protected $hidden=[
+        'created_at',
+        'updated_at'
+    ];
+
+
     public function buyer(){
         return $this->belongsTo(Buyer::class);
     }

@@ -20,6 +20,11 @@ class Products extends Model
         'seller_id'
     ];
 
+    protected $hidden=[
+        'created_at',
+        'updated_at'
+    ];
+
     public function categories(){
        return $this->belongsToMany(Categories::class);
     }
