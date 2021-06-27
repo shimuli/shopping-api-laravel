@@ -11,7 +11,12 @@ class Categories extends Model
 
     protected $fillable =[
         'name',
-        'description', 
+        'description',
+    ];
+
+    protected $hidden=[
+        'created_at',
+        'updated_at'
     ];
 
     // many to many relationship
