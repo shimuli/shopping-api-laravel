@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Buyer;
 use Illuminate\Http\Request;
 
-class BuyerCategoryController extends Controller
+class BuyerCategoryController extends ApiController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Buyer $buyer)
     {
-        //
+        // use collapse to create unique list
+        $category = $buyer->transactions()->with('product.categories')->get()->pluck('product.categories')->collapse()->unique('id')->values();
+        return $this->showAll($category);
     }
 
     /**
