@@ -10,6 +10,9 @@ class Seller extends User
 {
     use HasFactory;
 
+    protected $hidden =[
+        'pivot',
+    ];
     public static function boot(){
         parent::boot();
         // global scope

@@ -15,6 +15,10 @@ class Buyer extends User
         static::addGlobalScope(new BuyerScope);
     }
 
+    protected $hidden=[
+        'pivot'
+    ];
+
     // one buyer has many transaction relationship
     public function transactions(){
         return $this->hasMany(Transactions::class);

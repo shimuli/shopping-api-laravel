@@ -17,7 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->integer('quantity')->unsigned();
             $table->unsignedBigInteger('buyer_id')->index();
-            $table->unsignedBigInteger('product_id')->index();
+            $table->unsignedBigInteger('product_id')->unsigned();
 
             $table->timestamps();
 

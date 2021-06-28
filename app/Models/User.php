@@ -37,7 +37,8 @@ class User extends Authenticatable
         'password',
         'verified',
         'verification_token',
-        'admin'
+        'admin',
+        'pivot'
     ];
 
     // name setters and getters
