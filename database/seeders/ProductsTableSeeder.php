@@ -17,7 +17,7 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        Products::factory()->times(100)->create()->each(
+        Products::factory()->times(700)->create()->each(
             function($product){
                 $categories = Categories::all()->random(random_int(1,10))->pluck('id');
                 $product->categories()->attach($categories);

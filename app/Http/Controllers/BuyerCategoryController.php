@@ -5,19 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Buyer;
 use Illuminate\Http\Request;
 
-class BuyerProductController extends ApiController
+class BuyerCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Buyer $buyer)
+    public function index()
     {
-        // Eager loading
-        $products = $buyer->transactions()->with('product')->get()->pluck('product');
-
-        return $this->showAll($products);
+        //
     }
 
     /**

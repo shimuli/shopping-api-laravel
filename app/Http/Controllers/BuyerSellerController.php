@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Buyer;
 use Illuminate\Http\Request;
 
-class BuyerProductController extends ApiController
+class BuyerSellerController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,11 @@ class BuyerProductController extends ApiController
      */
     public function index(Buyer $buyer)
     {
-        // Eager loading
-        $products = $buyer->transactions()->with('product')->get()->pluck('product');
+        //nested relationship with edgar loading
+        $seller = $buyer->transactions()->with('product.seller')
+        ->get()->pluck('product.seller')->unique('id')->values();
+        return $this->showAll($seller);
 
-        return $this->showAll($products);
     }
 
     /**

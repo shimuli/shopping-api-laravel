@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\BuyerCategoryController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\BuyerProductController;
+use App\Http\Controllers\BuyerSellerController;
 use App\Http\Controllers\BuyerTransctionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductsController;
@@ -39,6 +42,12 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::resource('transactions.seller',TransactionSellerController::class);
     Route::resource('seller.products', SellerProductController::class);
     Route::resource('buyers.transactions', BuyerTransctionController::class);
+    Route::resource('buyers.products', BuyerProductController::class);
+    Route::resource('buyers.seller', BuyerSellerController::class);
+    Route::resource('buyers.categories', BuyerCategoryController::class);
+
+
+
 
 
 
