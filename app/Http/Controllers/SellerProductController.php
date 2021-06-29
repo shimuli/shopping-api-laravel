@@ -6,6 +6,7 @@ use App\Models\Products;
 use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SellerProductController extends ApiController
@@ -58,7 +59,7 @@ class SellerProductController extends ApiController
 
         $data = $request->all();
         $data['status'] = Products::UNAVAILABLE_PRODUCT;
-        $data['image'] = '1.jpg';
+        $data['image'] = $request->image->store(''); // add path and name if needed
         $data['seller_id'] = $seller->id;
 
         $product = Products::create($data);
@@ -121,6 +122,13 @@ class SellerProductController extends ApiController
                 return $this->errorResponse("Status update failed, the product must be in a category", 409);
             }
         }
+
+        // update image
+        if($request->hasFile('image')){
+            Storage::delete($product->image);
+
+            $product->image = $request->image->store('');
+        }
         if ($product->isClean()) {
             return $this->errorResponse('Select a product feature to update', 422);
         }
@@ -140,7 +148,14 @@ class SellerProductController extends ApiController
     {
         $this->checkSeller($seller, $product);
 
+
+
         $product->delete();
+
+        // delete image
+        Storage::delete($product->image);
+
+
         return response()->json([
             "message" => 'Deleted Successfully', 'code' => '204',
         ], 200);
