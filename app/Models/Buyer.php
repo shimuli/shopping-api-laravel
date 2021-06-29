@@ -16,7 +16,15 @@ class Buyer extends User
     }
 
     protected $hidden=[
-        'pivot'
+        'pivot',
+        'password',
+        'remember_token',
+        'verification_token',
+        'admin',
+        'email_verified_at',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     // one buyer has many transaction relationship

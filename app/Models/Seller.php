@@ -12,6 +12,14 @@ class Seller extends User
 
     protected $hidden =[
         'pivot',
+        'password',
+        'remember_token',
+        'verification_token',
+        'admin',
+        'email_verified_at',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
     public static function boot(){
         parent::boot();
