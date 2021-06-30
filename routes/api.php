@@ -19,7 +19,6 @@ use App\Http\Controllers\SellerBuyerController;
 use App\Http\Controllers\SellerCategoryController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SellerProductController;
-use App\Http\Controllers\SellerTransactions;
 use App\Http\Controllers\SellerTransactionsController;
 use App\Http\Controllers\TransactionCategoryController;
 use App\Http\Controllers\TransactionsController;
@@ -45,7 +44,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->name('api.v1.')->group(function () {
 
-     Route::get('/status', function () {
+    Route::get('/status', function () {
         return response()->json([
             'status' => 'Ok',
             'Message' => 'Let\'s make it work',
@@ -53,6 +52,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     })->name('status');
 
     Route::resource('users', UserController::class);
+    Route::name('verify')->get('users/verify/{token}', [UserController::class, 'verify']);
 
     Route::resource('buyers', BuyerController::class);
     Route::resource('buyers.transactions', BuyerTransctionController::class);
@@ -66,9 +66,6 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::resource('sellers.categories', SellerCategoryController::class);
     Route::resource('sellers.buyer', SellerBuyerController::class);
 
-
-
-
     Route::resource('categories', CategoryController::class);
     Route::resource('categories.products', CategoryProductController::class);
     Route::resource('categories.products', CategoryProductController::class);
@@ -76,24 +73,19 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::resource('categories.transactions', CategoryTranscationsController::class);
     Route::resource('categories.buyer', CategoryBuyerController::class);
 
-
-
-
     Route::resource('products', ProductsController::class);
     Route::resource('products.transactions', ProductTransctionController::class);
     Route::resource('products.buyers', ProductBuyerController::class);
     Route::resource('products.categories', ProductCategoryController::class);
     Route::resource('products.buyers.transaction', ProductBuyerTransactionController::class)->only(['store']);
 
-
-
-
-
     Route::resource('transactions', TransactionsController::class);
     Route::resource('transactions.categories', TransactionCategoryController::class);
     Route::resource('transactions.seller', TransactionSellerController::class);
 
-
 //    ->only(['index', 'show', 'create', 'store']);
 
 });
+
+
+
