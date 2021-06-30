@@ -54,6 +54,9 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::resource('users', UserController::class);
     Route::name('verify')->get('users/verify/{token}', [UserController::class, 'verify']);
 
+    Route::name('resend')->get('users/{user}/resend', [UserController::class, 'resend']);
+
+
     Route::resource('buyers', BuyerController::class);
     Route::resource('buyers.transactions', BuyerTransctionController::class);
     Route::resource('buyers.products', BuyerProductController::class);

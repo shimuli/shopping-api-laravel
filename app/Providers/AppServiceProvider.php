@@ -33,12 +33,21 @@ class AppServiceProvider extends ServiceProvider
 
         // Email sending event
         User::created(function ($user) {
-            Mail::to($user)->send(new UserCreated($user));
+            retry(5, function () use ($user) {
+                Mail::to($user)->send(new UserCreated($user));
+
+            }, 100);
+
         });
 
         User::updated(function ($user) {
-            if($user->isDirty('email')){
-                Mail::to($user)->send(new UserEmailChanged($user));
+            if ($user->isDirty('email')) {
+
+                // retry after every 10 seconds five times before failing
+                retry(5, function () use ($user) {
+                    Mail::to($user)->send(new UserEmailChanged($user));
+                }, 100);
+
             }
 
         });

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserCreated;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends ApiController
 {
@@ -164,11 +166,25 @@ class UserController extends ApiController
     public function verify($token){
         $user = User::where('verification_token', $token)->firstOrFail();
         $user->verified = User::VERIFIED_USER;
-        $user->verification_token = null;
+        $user->verification_token = 1;
 
         $user->save();
 
         return $this->showMessage("The account has been verified");
+    }
+
+    public function resend(User $user){
+        if($user->isVerified()){
+            return $this->errorResponse("This user is already verified", 409);
+        }
+
+        // retry after every 10 seconds five times before failing
+         retry(5, function () use ($user) {
+             Mail::to($user)->send(new UserCreated($user));
+         }, 100);
+
+
+        return $this->showMessage('The verification email was resend');
     }
 
 }
