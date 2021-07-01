@@ -17,13 +17,9 @@ class CategoryController extends ApiController
         // $data = Categories::all();
         $perPage = $request->input('per_page') ?? 5;
 
-        $categories = Categories::paginate($perPage)->appends(
-            [
-                'per_page' => $perPage,
-            ]
-        );
-// return $this->showAll($buyer);
-        return response()->json($categories, 200);
+        $categories = Categories::all();
+        return $this->showAll($categories);
+       // return response()->json($categories, 200);
 
     }
 
