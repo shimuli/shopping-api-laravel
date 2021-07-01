@@ -18,15 +18,19 @@ class SellerProductController extends ApiController
      */
     public function index(Request $request, Seller $seller)
     {
-        $perPage = $request->input('per_page') ?? 5;
+        // $perPage = $request->input('per_page') ?? 5;
 
-        $product = $seller->products()->paginate($perPage)->appends(
-            [
-                'per_page' => $perPage,
-            ]
-        );
-        //return $this->showAll($product);
-        return response()->json(['product' => $product], 200);
+        // $product = $seller->products()->paginate($perPage)->appends(
+        //     [
+        //         'per_page' => $perPage,
+        //     ]
+        // );
+         //return $this->showAll($product);
+        // return response()->json(['product' => $product], 200);
+
+        $products = $seller->products;
+
+        return $this->showAll($products);
 
     }
 
@@ -124,7 +128,7 @@ class SellerProductController extends ApiController
         }
 
         // update image
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             Storage::delete($product->image);
 
             $product->image = $request->image->store('');
@@ -148,13 +152,10 @@ class SellerProductController extends ApiController
     {
         $this->checkSeller($seller, $product);
 
-
-
         $product->delete();
 
         // delete image
         Storage::delete($product->image);
-
 
         return response()->json([
             "message" => 'Deleted Successfully', 'code' => '204',

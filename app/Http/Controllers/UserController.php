@@ -78,6 +78,8 @@ class UserController extends ApiController
     {
         //$user = User::findOrFail($id);
         return response()->json(['user' => $user], 200);
+       // return $this->showOne($user);
+
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Products;
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class ProductsController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +14,18 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->input('per_page') ?? 5;
+        // $perPage = $request->input('per_page') ?? 5;
 
-        $products = Products::paginate($perPage)->appends(
-            [
-                'per_page' => $perPage,
-            ]
-        );
-        return response()->json($products, 200);
+        // $products = Products::paginate($perPage)->appends(
+        //     [
+        //         'per_page' => $perPage,
+        //     ]
+        // );
+        // return response()->json($products, 200);
+
+        $products = Products::all();
+
+        return $this->showAll($products);
 
     }
 
@@ -54,7 +58,8 @@ class ProductsController extends Controller
      */
     public function show(Products $product)
     {
-        return response()->json($product, 200);
+        // return response()->json($product, 200);
+        return $this->showOne($product);
 
     }
 
