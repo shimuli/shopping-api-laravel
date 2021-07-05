@@ -58,12 +58,16 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'client.credentials'=> \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
          'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        // 'throttle' => \Illuminate\Routing\Middleware\CustomeThrottleREquestMiddleware::class,
+        // 'throttle' => \Illuminate\Routing\Middleware\CustomThrottleREquestMiddleware::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'signature'=> \App\Http\Middleware\SignatureMiddleware::class,
+        'transform.input'=> \App\Http\Middleware\TransformMiddleware::class,
+
+
     ];
 }

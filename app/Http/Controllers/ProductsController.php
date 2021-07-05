@@ -3,15 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
+use App\Transformers\ProductTransformer;
 use Illuminate\Http\Request;
 
 class ProductsController extends ApiController
 {
+     public function __construct()
+    {
+        $this->middleware('client.credentials')->only(['index', 'show']);
+        $this->middleware('auth:api')->except(['index', 'show']);
+
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    // public function __construct()
+    // {
+    //     parent::__construct();
+    //    // $this->middleware('transform.input:' . ProductTransformer::class)->only(['store','update']);
+    // }
     public function index(Request $request)
     {
         // $perPage = $request->input('per_page') ?? 5;

@@ -51,6 +51,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         ]);
     })->name('status');
 
+    Route::post('oauth/token', 'Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
     Route::resource('users', UserController::class);
     Route::name('verify')->get('users/verify/{token}', [UserController::class, 'verify']);
 

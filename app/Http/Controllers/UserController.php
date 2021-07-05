@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends ApiController
 {
+     public function __construct()
+    {
+        $this->middleware('client.credentials')->only(['resend']);
+        $this->middleware('auth:api')->except(['resend', 'verify','store']);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -182,7 +188,8 @@ class UserController extends ApiController
 
         // retry after every 10 seconds five times before failing
          retry(5, function () use ($user) {
-             Mail::to($user)->send(new UserCreated($user));
+             //sed email method use in production
+            // Mail::to($user)->send(new UserCreated($user));
          }, 100);
 
 

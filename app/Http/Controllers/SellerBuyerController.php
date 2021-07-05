@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class SellerBuyerController extends ApiController
 {
+     public function __construct()
+    {
+        parent::__construct();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +26,7 @@ class SellerBuyerController extends ApiController
         ->pluck('seller');
 
         return $this->showAll($buyers);
-        
+
     }
 
     /**
