@@ -10,7 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\CategorySellerController;
 use App\Http\Controllers\CategoryTranscationsController;
-use App\Http\Controllers\LoginContoller;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductBuyerController;
 use App\Http\Controllers\ProductBuyerTransactionController;
 use App\Http\Controllers\ProductCategoryController;
@@ -57,9 +57,9 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::name('verify')->get('users/verify/{token}', [UserController::class, 'verify']);
     Route::name('resend')->get('users/{user}/resend', [UserController::class, 'resend']);
 
-    Route::post('login', [LoginContoller::class, 'login']);
+    Route::post('login', [LoginController::class, 'login']);
 
-    Route::post('logout', [LoginContoller::class, 'logout']);
+    Route::post('logout', [LoginController::class, 'logout']);
 
 
 

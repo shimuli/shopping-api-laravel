@@ -45,7 +45,7 @@ class ProductBuyerTransactionController extends ApiController
         // our rules
         $rules=[
             'quantity'=> 'required|integer|min:1',
-            'price'=> 'required|integer|min:1',
+            'price'=> 'required|integer|min:1'
         ];
 
         // implement the rules

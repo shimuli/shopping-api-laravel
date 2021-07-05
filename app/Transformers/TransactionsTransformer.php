@@ -35,6 +35,8 @@ class TransactionsTransformer extends TransformerAbstract
         return [
             'identifier'=> (int)$transactions->id,
             'quantity'=> (int)$transactions->quantity,
+            'cost'=>(int)$transactions->price,
+            'total_cost'=>(int)$transactions->price * (int)$transactions->quantity,
             'buyer'=> (int)$transactions->buyer_id,
             'product'=> (int)$transactions->product_id,
             'createdDate' => (string) $transactions->created_at,
