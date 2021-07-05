@@ -56,6 +56,7 @@ class SellerProductController extends ApiController
             'name' => 'required',
             'description' => 'required',
             'quantity' => 'required|integer|min:1',
+            'price'=> 'required|integer|min:50',
             'image' => 'required|image',
         ];
 
@@ -104,6 +105,7 @@ class SellerProductController extends ApiController
     {
         $rules = [
             'quantity' => 'integer|min:1',
+            'price'=> 'integer|min:50',
             'status' => 'in:' . Products::AVAILABLE_PRODUCT . ',' . Products::UNAVAILABLE_PRODUCT,
             'image' => 'image',
         ];

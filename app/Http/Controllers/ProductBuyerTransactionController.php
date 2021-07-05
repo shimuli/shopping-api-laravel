@@ -44,7 +44,8 @@ class ProductBuyerTransactionController extends ApiController
     {
         // our rules
         $rules=[
-            'quantity'=> 'required|integer|min:1'
+            'quantity'=> 'required|integer|min:1',
+            'price'=> 'required|integer|min:1',
         ];
 
         // implement the rules
@@ -84,6 +85,7 @@ class ProductBuyerTransactionController extends ApiController
 
             $transaction = Transactions::create([
                 'quantity' =>$request->quantity,
+                'price'=>$request->price,
                 'buyer_id'=> $buyer->id,
                 'product_id'=>$product->id
             ]);

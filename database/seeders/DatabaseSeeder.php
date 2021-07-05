@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
 
         // disable events
         User::flushEventListeners();
-        Categories::flushEventListeners();
-        Products::flushEventListeners();
-        Transactions::flushEventListeners();
+        // Categories::flushEventListeners();
+        // Products::flushEventListeners();
+        // Transactions::flushEventListeners();
 
         //DB::statement('SET FOREIGN_KEY_CHECK = 0');
         // \App\Models\User::factory(10)->create();

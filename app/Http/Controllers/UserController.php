@@ -189,7 +189,7 @@ class UserController extends ApiController
         // retry after every 10 seconds five times before failing
          retry(5, function () use ($user) {
              //sed email method use in production
-            // Mail::to($user)->send(new UserCreated($user));
+             Mail::to($user)->send(new UserCreated($user));
          }, 100);
 
 
